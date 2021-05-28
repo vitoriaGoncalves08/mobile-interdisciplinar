@@ -1,87 +1,105 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, StatusBar } from 'react-native';
 
 export default function App() {
-  const [carregando, setCarregando] = useState(true);
-  const [dados, setDados] = useState([]);
- 
-  useEffect(
-    ()=>{
-      fetch('http://allanvidal.com/json-categoria-parametro.php?categoria='+cate)
-      .then((resp) =>resp.json())
-      .then((json)=>setDados(json.categorias))
-      .catch(()=>(alert('Erro ao carregar dados')))
-      .finally(()=>setCarregando(false))
-    },[]
-  );
+  const [pesquisa, setPesquisa] = useState(null);
+  const [Render, setRender] = useState([]);
+
+  useEffect(() => {
+    fetch('http://192.168.15.8/Escola/2_bimestre/Interdisciplinar/Controllers/PegaPalavra.php?term='+pesquisa)
+    .then(val => {
+      val.json().then(val => {
+        console.log(pesquisa.length);
+        if(pesquisa != null && pesquisa.length != 0){
+          setRender(val)
+        }else{setRender([])}
+      }).catch(err => {
+        alert(err);
+      })
+    })
+  }, [pesquisa])
 
   return (
-    <View style={styles.container}>
-      <View style={styles.viewTitle}>
-        <Text style={styles.title}>Categorias</Text>
-        <TextInput placeholder="Pesquise uma categoria" onChangeText={(value)=>setPesquisa(value)}/>
-        <TouchableOpacity onPress={()=>pesquisar(pesquisa)}>
-          <Text>Pesquisar</Text>
-        </TouchableOpacity>
-      </View>
-      <StatusBar style="auto" />
-      {
-      carregando?<ActivityIndicator/> : (
-          <FlatList 
-          data={dados}
-          keyExtractor={({idCategoria},index)=>idCategoria} 
-          renderItem={({item})=>(
-            <View style={styles.flat}>
-                  <Text style={styles.data1}>{item.idCategoria}</Text>
-                  <Text style={styles.data2}>{item.categoria.charAt(0).toUpperCase() + item.categoria.slice(1)}</Text>
-            </View>
-          )}
-         />
-        )
+
+    <FlatList
+      style={styles.container}
+      ListHeaderComponent={
+        <View style={styles.container}>
+          <Text style={styles.title}>Words</Text>
+          <View style={styles.viewTitle}>
+            <TextInput style={styles.text} placeholder="Pesquise uma categoria" onChangeText={text => setPesquisa(text)} />
+            <TouchableOpacity activeOpacity={0.8} style={styles.button} >
+              <Text style={styles.textBtn}>Pesquisar</Text>
+            </TouchableOpacity>
+          </View>
+          <StatusBar translucent={false} />
+        </View>
       }
-    </View>
-  );
+      data={Render}
+      keyExtractor={(val, index) => val.idPalavra}
+      renderItem={val => (
+        <View style={styles.flat}>
+          <Text style={styles.data2}>ID: {val.item.idPalavra}</Text>
+          <Text style={styles.data2}>Palavra: {val.item.nomePalavra}</Text>
+          <Text style={styles.data2}>Tradução: {val.item.traducaoPalavra}</Text>
+          <Text style={styles.data2}>Descrição: {val.item.descricaoPalavra}</Text>
+        </View>
+      )}
+    />
+  )
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C1C1C',
-    
+    backgroundColor: '#aaa',
+    paddingHorizontal: 10,
   },
-  viewTitle:{
-    alignItems:'center'
+  viewTitle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingLeft: 10,
+    backgroundColor: '#ddd',
+    borderRadius: 4,
+    borderWidth: 1,
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderLeftWidth: 1,
+    backgroundColor: "#9400D366",
   },
   title: {
-    color:'white',
-    fontSize:40,
-    marginTop: 50,
-    marginBottom:30,
-    fontWeight:'bold',
-    borderBottomWidth: 5,
-    borderColor:'#9400D3',
+    color: '#9400D3',
+    fontSize: 40,
+    margin: 20,
+    textAlign: 'center',
+    letterSpacing: 1,
+    fontWeight: '100',
   },
   flat: {
-    flex:1,
-    flexDirection:'row',
-    padding:25,
-    backgroundColor:'#2d2130',
-    marginLeft:50,
-    marginRight:50,
-    marginBottom:10,
-    marginTop:10,
-    borderRadius:8,
-  
-  },
-  data1: {
-    fontSize:22,
-    fontWeight:'bold',
-    marginRight:10,
-    color:'#9400D3'
+    flex: 1,
+    flexDirection: 'column',
+    padding: 25,
+    backgroundColor: '#2d2130',
+    marginBottom: 10,
+    marginTop: 10,
+    borderRadius: 4,
   },
   data2: {
-    fontSize:22,
-    color:'#fff',
+    fontSize: 16,
+    paddingBottom: 5,
+    color: '#fff',
+  }
+  , textBtn: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  text: {
+    fontSize: 16,
+    color: 'black',
+    flexGrow: 2,
   }
 });
