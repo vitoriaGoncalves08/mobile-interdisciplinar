@@ -47,10 +47,10 @@ export default function App() {
         keyExtractor={(val, index) => val.idPalavra}
         renderItem={val => (
           <View style={Item.View}>
-            <Text>ID: {val.item.idPalavra}</Text>
-            <Text>Palavra: {val.item.nomePalavra}</Text>
-            <Text>Tradução: {val.item.traducaoPalavra}</Text>
-            <Text>Descrição: {val.item.descricaoPalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>ID: </Text>{val.item.idPalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Palavra:</Text> {val.item.nomePalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Tradução:</Text> {val.item.traducaoPalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Descrição:</Text> {val.item.descricaoPalavra}</Text>
           </View>
         )}
       />
