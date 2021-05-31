@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-const color = ['#9400D3', '#1d1120'];
+const color = ['#9400D3', '#2d2130'];
 const Header = StyleSheet.create({
     View:{
-        backgroundColor: '#555',
+        backgroundColor: '#24262b',
         paddingHorizontal: 10,
         paddingVertical: 30,
     },
@@ -11,7 +11,8 @@ const Header = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         fontWeight: '100',
-        fontFamily: 'monospace', //Fonte aqui fofa 
+        fontFamily: 'monospace', //Fonte aqui fofa   
+        fontWeight:'bold' 
     },
     input:{
         paddingVertical: 5,
@@ -23,6 +24,8 @@ const Header = StyleSheet.create({
         borderColor: '#222',
         backgroundColor: '#ddd',
         paddingHorizontal: 10,
+        borderBottomWidth: 5,
+        borderColor:color[0],
     }
 });
 
@@ -36,6 +39,7 @@ const Item = StyleSheet.create({
         borderRadius: 4,
         borderWidth: .2,
         borderColor: color[0],
+        margin:20
     },
     text: {
         color: 'white',
@@ -46,7 +50,8 @@ const Item = StyleSheet.create({
         color: color[0],
         fontWeight: 'bold',
         letterSpacing: 1.5,
-    }
+        fontWeight:'bold' 
+     }
 });
 
 

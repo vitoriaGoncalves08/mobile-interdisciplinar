@@ -12,7 +12,7 @@ export default function App() {
       PegaPalavra(pesquisa)
         .then(val=>{
           setRender(JSON.parse(val));
-        })
+        }) 
     }else setRender([]);
   }, [pesquisa])
   return (
@@ -31,12 +31,12 @@ export default function App() {
           //   <StatusBar translucent={false} />
           // </View>
             <View>
-              <Text h1 h1Style={Header.h1}>Words</Text>
+              <Text h1 h1Style={Header.h1}>STerms</Text>
               <Input
                value={pesquisa}
-               placeholder='Pesquise algum termo...'
+               placeholder='Search for a term...'
                onChangeText={val=>setPesquisa(val)}
-               label='Termo'
+               label='Term'
                labelStyle={{color: "white"}}
                inputContainerStyle={Header.input}
                />
