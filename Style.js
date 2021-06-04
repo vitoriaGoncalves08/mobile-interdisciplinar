@@ -17,10 +17,12 @@ const Header = StyleSheet.create({
     input:{
         paddingVertical: 5,
         borderTopEndRadius: 10,
+        fontFamily: 'monospace', //Fonte aqui fofa   
         borderBottomLeftRadius: 2,
         borderBottomEndRadius: 2,
         borderTopLeftRadius: 10,
         borderWidth: 1,
+        marginBottom: -10,
         borderColor: '#222',
         backgroundColor: '#ddd',
         paddingHorizontal: 10,
