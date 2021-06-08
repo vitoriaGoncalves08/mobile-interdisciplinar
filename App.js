@@ -17,7 +17,7 @@ export function App(props){
             <Button
             type='clear'
             icon={<Icon name='arrow-left' size={25} color='white' />}
-            onPress={() => console.log(props.navigation.goBack())}
+            onPress={() => props.navigation.goBack()}
           />
           )})} name='Register' component={Insert} />
         </Stack.Navigator>
