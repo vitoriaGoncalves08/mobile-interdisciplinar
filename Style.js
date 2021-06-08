@@ -57,6 +57,7 @@ const Item = StyleSheet.create({
      icons:{
         flex:1,
         flexDirection:'row-reverse',
+        marginBottom:-20
      }
 });
 
