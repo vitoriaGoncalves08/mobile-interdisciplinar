@@ -19,7 +19,7 @@ export function App(props){
             icon={<Icon name='arrow-left' size={25} color='white' />}
             onPress={() => props.navigation.goBack()}
           />
-          )})} name='Register' component={Insert} />
+          )})} name='Term' component={Insert} />
         </Stack.Navigator>
       </NavigationContainer>
     )

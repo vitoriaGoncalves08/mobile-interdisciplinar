@@ -36,7 +36,7 @@ export default function Index(props) {
               icon={<Icon name='plus' size={20} color='white' />}
               titleStyle={{ color: 'white', marginLeft: 6 }} // pode tirar essa fita
               onPress={() => {
-                props.navigation.navigate('Register');
+                props.navigation.navigate('Term');
               }}
             />
 
@@ -69,7 +69,7 @@ export default function Index(props) {
               buttonStyle={
                 { marginTop: 5, borderColor: '#9400D3aa', borderWidth: .8, borderRadius: 4, paddingVertical: 6 }}
               onPress={() => {
-                props.navigation.navigate('Register',{data: val.item, textTitle: 'Update'});
+                props.navigation.navigate('Term',{data: val.item, textTitle: 'Update'});
               }} title='Update' titleStyle={Item.text} />
           </View>
         )}

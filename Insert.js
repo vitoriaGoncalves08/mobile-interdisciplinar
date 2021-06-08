@@ -4,27 +4,31 @@ import { ThemeProvider, Input, Text, Button } from "react-native-elements";
 import { InserePalavra, AtualizarPalavra } from './Controller'
 import { Header } from "./Style";
 export default function Insert(props) {
-
+    const [title, setTitle] = useState('Register');
     const [name, setName] = useState(null);
     const [id, setId] = useState(null);
     const [translate, settranslate] = useState(null);
     const [description, setdescription] = useState(null);
   
     useEffect(() => {
-        // console.log(props.route);   
-        if(props.route.params.data)
-        {
-            let palavra = props.route.params.data;
-            setId(palavra[0]);
-            setName(palavra[1]);
-            settranslate(palavra[2]);
-            setdescription(palavra[3]);
+        if(props.route.params){
+            if(props.route.params.textTitle){
+                setTitle(props.route.params.textTitle)
+            }
+            if(props.route.params.data)
+            {
+                let palavra = props.route.params.data;
+                setId(palavra[0]);
+                setName(palavra[1]);
+                settranslate(palavra[2]);
+                setdescription(palavra[3]);
+            }
         }
     }, [])
   return (
     <ThemeProvider>
       <View style={[Header.View, {flex: 1}]}>
-            <Text h1 h1Style={[Header.h1,{marginTop: -10,marginBottom: 10,fontSize: 28}]}>{props.route.params.textTitle+" the word" || 'Insert a new term'}</Text>
+            <Text h1 h1Style={[Header.h1,{marginTop: -10,marginBottom: 10,fontSize: 28}]}>{title} a term</Text>
             <Input
             placeholder='Type a word'
             label="Word"
@@ -47,15 +51,16 @@ export default function Insert(props) {
             label='Description'
             labelStyle={{color: "white"}}
             onChangeText={text=>setdescription(text)}
-            inputContainerStyle={[Header.input, {paddingVertical: 50,}]}
+            numberOfLines={6}
+            multiline
+            inputContainerStyle={[Header.input, {}]}
             />
-            <Button title={props.route.params.textTitle || 'Register!'}
+            <Button title={`${title}!`}
             type='solid'
             buttonStyle={{backgroundColor: '#9400D399',width: '70%', alignSelf: 'center', paddingVertical: 15,borderColor:'white',borderWidth: .3,borderRadius: 4}}
             titleStyle={{color:'white', marginLeft: 6,fontSize: 20}} // pode tirar essa fita
             onPress={()=>{
                 
-                // props.navigation.navigate('Register');
                 if(translate && name && description){
                     if(id != null){
                         // atualizar
@@ -66,15 +71,13 @@ export default function Insert(props) {
                             descricao: description
                         })
                         data.then(val=>{
-
-                            console.log(val);
-                            // setdescription('');
-                            // setName('');
-                            // setId(null);
-                            // settranslate('');
+                            setdescription('');
+                            setName('');
+                            setId(null);
+                            settranslate('');
                         })
                         .catch((val)=>{
-                            console.log(val);
+                            console.log("Error:" +val);
                         })
                     }else{
                         // inserir
