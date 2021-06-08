@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-const color = ['#9400D3', '#2d2130'];
+const color = ['#9400D3', '#40374e'];
 const Header = StyleSheet.create({
     View:{
         backgroundColor: '#24262b',
@@ -41,7 +41,7 @@ const Item = StyleSheet.create({
         borderRadius: 4,
         borderWidth: .2,
         borderColor: color[0],
-        margin:20
+        margin:20,
     },
     text: {
         color: 'white',
@@ -53,6 +53,10 @@ const Item = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 1.5,
         fontWeight:'bold' 
+     },
+     icons:{
+        flex:1,
+        flexDirection:'row-reverse',
      }
 });
 

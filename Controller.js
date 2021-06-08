@@ -1,8 +1,8 @@
 import Axios from "axios";
-const URL_MAIN = 'http://192.168.15.8/Escola/2b/Interdisciplinar/Controllers/PegaPalavra.php';
-const URL_SET = 'http://192.168.15.8/Escola/2b/Interdisciplinar/Controllers/InserirPalavra.php'
-const URL_DELETE = 'http://192.168.15.8/Escola/2b/Interdisciplinar/Controllers/DeletaPalavra.php'
-const URL_UPDATE = 'http://192.168.15.8/Escola/2b/Interdisciplinar/Controllers/AtualizarPalavra.php'
+const URL_MAIN = 'http://192.168.0.112/3MtecA/02-06-Sterms/Controllers/PegaPalavra.php';
+const URL_SET = 'http://192.168.0.112/3MtecA/02-06-Sterms/Controllers/InserirPalavra.php'
+const URL_DELETE = 'http://192.168.0.112/3MtecA/02-06-Sterms/Controllers/DeletaPalavra.php'
+const URL_UPDATE = 'http://192.168.0.112/3MtecA/02-06-Sterms/Controllers/AtualizarPalavra.php'
 
 const PegaPalavra = async function(termo=''){
     let data = await Axios.get(`${URL_MAIN}?term=${termo}`);

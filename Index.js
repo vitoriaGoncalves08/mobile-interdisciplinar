@@ -4,6 +4,8 @@ import { PegaPalavra, DeletarPalavra} from './Controller';
 import { Header, Item } from './Style';
 import { ThemeProvider, Input, Text, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/Entypo";
+const color = ['#9400D3', '#2d2130'];
+
 export default function Index(props) {
   const [pesquisa, setPesquisa] = useState(null);
   const [Render, setRender] = useState([]);
@@ -32,7 +34,7 @@ export default function Index(props) {
             />
             <Button title='Register new word'
               type='solid'
-              buttonStyle={{ backgroundColor: '#9400D399', width: '70%', alignSelf: 'center', paddingVertical: 10, borderColor: 'white', borderWidth: .3, borderRadius: 4 }}
+              buttonStyle={{ backgroundColor: color[0], width: '70%', alignSelf: 'center', paddingVertical: 10, borderColor: 'white', borderWidth: .3, borderRadius: 4 }}
               icon={<Icon name='plus' size={20} color='white' />}
               titleStyle={{ color: 'white', marginLeft: 6 }} // pode tirar essa fita
               onPress={() => {
@@ -47,15 +49,12 @@ export default function Index(props) {
         keyExtractor={(val, index) => val.idPalavra}
         renderItem={val => (
           <View style={Item.View}>
-            <Text style={Item.text}><Text style={Item.strong}>ID: </Text>{val.item.idPalavra}</Text>
-            <Text style={Item.text}><Text style={Item.strong}>Palavra:</Text> {val.item.nomePalavra}</Text>
-            <Text style={Item.text}><Text style={Item.strong}>Tradução:</Text> {val.item.traducaoPalavra}</Text>
-            <Text style={Item.text}><Text style={Item.strong}>Descrição:</Text> {val.item.descricaoPalavra}</Text>
-
+            <View style={Item.icons}>
             <Button
               type='clear'
               buttonStyle={
-                { marginTop: 5, borderColor: '#9400D3aa', borderWidth: .8, borderRadius: 4, paddingVertical: 6 }}
+                { borderRadius:50 ,backgroundColor: color[0], marginRight:10}}
+                icon={<Icon name='erase' size={20} color='white' />}
               onPress={async() => {
                 if(val.item.idPalavra != null){
                   let id = val.item.idPalavra;
@@ -63,14 +62,23 @@ export default function Index(props) {
                   console.log(res);
                   setPesquisa('');
                 }
-              }} title='Delete' titleStyle={Item.text} />
+              }}/>
+
             <Button
               type='clear'
               buttonStyle={
-                { marginTop: 5, borderColor: '#9400D3aa', borderWidth: .8, borderRadius: 4, paddingVertical: 6 }}
+                { borderRadius:50 ,backgroundColor: color[0], marginRight:10}}
+                icon={<Icon name='new-message' size={20} color='white' />}
               onPress={() => {
                 props.navigation.navigate('Term',{data: val.item, textTitle: 'Update'});
-              }} title='Update' titleStyle={Item.text} />
+              }}/>
+
+              </View>
+
+            <Text style={Item.text}><Text style={Item.strong}>ID: </Text>{val.item.idPalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Palavra:</Text> {val.item.nomePalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Tradução:</Text> {val.item.traducaoPalavra}</Text>
+            <Text style={Item.text}><Text style={Item.strong}>Descrição:</Text> {val.item.descricaoPalavra}</Text>
           </View>
         )}
       />
